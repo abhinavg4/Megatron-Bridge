@@ -28,7 +28,7 @@ from megatron.bridge.models.conversion.param_mapping import (
     ReplicatedMapping,
 )
 from megatron.bridge.models.hf_pretrained.wan import PreTrainedWAN
-from dfm.src.megatron.bridge.models.wan.wan_provider import WanModelProvider
+from megatron.bridge.models.wan.wan_provider import WanModelProvider
 from megatron.core.transformer.utils import openai_gelu
 from megatron.bridge.models.conversion.utils import get_module_and_param_from_name
 

@@ -15,7 +15,7 @@
 import os
 from typing import List, Optional, Union
 
-from dfm.src.megatron.data.wan_energon_datamodule.py import WanDataModuleConfig
+from dfm.src.megatron.data.wan.wan_energon_datamodule import WanDataModuleConfig
 from megatron.bridge.models.wan.wan_provider import WanModelProvider
 import torch
 from megatron.core.distributed import DistributedDataParallelConfig

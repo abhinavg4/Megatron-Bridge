@@ -8,8 +8,8 @@ os.environ["RANK"] = "0"
 os.environ["WORLD_SIZE"] = "1"
 os.environ["LOCAL_RANK"] = "0"
 #
-# hf = PreTrainedWAN("Wan-AI/Wan2.1-T2V-1.3B-Diffusers")
-hf = PreTrainedWAN("Wan-AI/Wan2.1-T2V-14B-Diffusers")
+hf = PreTrainedWAN("Wan-AI/Wan2.1-T2V-1.3B-Diffusers")
+# hf = PreTrainedWAN("Wan-AI/Wan2.1-T2V-14B-Diffusers")
 bridge = WanBridge()
 #
 provider = bridge.provider_bridge(hf)
