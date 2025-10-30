@@ -29,9 +29,9 @@ import torch
 import torch.distributed as dist
 from PIL import Image
 
-from megatron.bridge.models.wan.flow_matching.flow_inference_pipeline import FlowInferencePipeline
-from megatron.bridge.models.wan.inference.configs import SIZE_CONFIGS, SUPPORTED_SIZES, WAN_CONFIGS
-from megatron.bridge.models.wan.inference.utils.utils import cache_video, str2bool
+from dfm.src.megatron.model.wan.flow_matching.flow_inference_pipeline.py import FlowInferencePipeline
+from dfm.src.megatron.model.wan.inference.configs.py import SIZE_CONFIGS, SUPPORTED_SIZES, WAN_CONFIGS
+from dfm.src.megatron.model.wan.inference.utils.utils.py import cache_video, str2bool
 
 EXAMPLE_PROMPT = {
     "t2v-1.3B": {

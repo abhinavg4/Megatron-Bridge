@@ -21,7 +21,7 @@ from megatron.bridge.models.transformer_config import TransformerConfig
 
 from megatron.bridge.models.model_provider import ModelProviderMixin
 from megatron.core.models.common.vision_module.vision_module import VisionModule
-from megatron.bridge.models.wan.wan_model import WanModel
+from dfm.src.megatron.model.wan.wan_model import WanModel
 
 logger = logging.getLogger(__name__)
 

@@ -15,7 +15,7 @@
 from functools import partial
 
 import torch
-from megatron.bridge.models.wan.wan_model import WanModel
+from dfm.src.megatron.model.wan.wan_model import WanModel
 from diffusers import WanTransformer3DModel
 
 from megatron.bridge.models.conversion.mapping_registry import MegatronMappingRegistry
@@ -28,7 +28,7 @@ from megatron.bridge.models.conversion.param_mapping import (
     ReplicatedMapping,
 )
 from megatron.bridge.models.hf_pretrained.wan import PreTrainedWAN
-from megatron.bridge.models.wan.wan_provider import WanModelProvider
+from dfm.src.megatron.bridge.models.wan.wan_provider import WanModelProvider
 from megatron.core.transformer.utils import openai_gelu
 from megatron.bridge.models.conversion.utils import get_module_and_param_from_name
 

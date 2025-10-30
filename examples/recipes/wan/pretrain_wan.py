@@ -60,7 +60,7 @@ from omegaconf import OmegaConf
 
 from megatron.bridge.recipes.wan.wan import pretrain_config
 from megatron.bridge.training.config import ConfigContainer
-from megatron.bridge.models.wan.wan_step import WanForwardStep
+from dfm.src.megatron.bridge.training.wan_step import WanForwardStep
 from megatron.bridge.training.pretrain import pretrain
 from megatron.bridge.training.utils.omegaconf_utils import (
     apply_overrides,
