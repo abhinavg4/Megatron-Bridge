@@ -20,8 +20,8 @@ from typing import Literal, Optional, Union
 
 import torch
 import torch.nn as nn
+from megatron.bridge.models.DiTModel.attention_wan import WanCrossAttention, WanCrossAttentionSubmodules
 from megatron.core.jit import jit_fuser
-from megatron.core.process_groups_config import ProcessGroupCollection
 from megatron.core.transformer.attention import (
     CrossAttention,
     CrossAttentionSubmodules,
@@ -348,7 +348,7 @@ class DiTLayerWithAdaLN(TransformerLayer):
         layer_number: int = 1,
         hidden_dropout: float = None,
         position_embedding_type: Literal["learned_absolute", "rope"] = "learned_absolute",
-        pg_collection: Optional[ProcessGroupCollection] = None,
+        pg_collection= None,
         vp_stage: Optional[int] = None,
     ):
         def _replace_no_cp_submodules(submodules):
@@ -400,7 +400,8 @@ class DiTLayerWithAdaLN(TransformerLayer):
         inference_params=None,
         packed_seq_params=None,
         sequence_len_offset=None,
-        inference_context=None
+        inference_context=None,
+        rotary_pos_cos_sin=None
     ):
         # timestep embedding
         timestep_emb = attention_mask
@@ -436,7 +437,8 @@ class DiTLayerWithAdaLN(TransformerLayer):
                 shift=shift_ca,
                 scale=scale_ca,
             )
-            #import pdb; pdb.set_trace()
+
+            # import pdb; pdb.set_trace()
             attention_output, _ = self.cross_attention(
                 pre_cross_attn_layernorm_output_ada,
                 attention_mask=context_mask,
@@ -774,16 +776,16 @@ def get_dit_adaln_block_with_transformer_engine_spec() -> ModuleSpec:
                 ),
             ),
             cross_attention=ModuleSpec(
-                module=CrossAttention,
+                module=WanCrossAttention,
                 params=params,
-                submodules=CrossAttentionSubmodules(
+                submodules=WanCrossAttentionSubmodules(
                     linear_q=TEColumnParallelLinear,
                     linear_kv=TEColumnParallelLinear,
                     core_attention=TEDotProductAttention,
                     linear_proj=TERowParallelLinear,
                     # Cross attention no longer is supports q and k layernorms
-                    # q_layernorm=RMSNorm,
-                    # k_layernorm=RMSNorm,
+                    q_layernorm=RMSNorm,
+                    k_layernorm=RMSNorm,
                 ),
             ),
             mlp=ModuleSpec(
