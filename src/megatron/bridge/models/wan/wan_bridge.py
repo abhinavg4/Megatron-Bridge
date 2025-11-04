@@ -28,7 +28,7 @@ from megatron.bridge.models.conversion.param_mapping import (
     ReplicatedMapping,
 )
 from megatron.bridge.models.hf_pretrained.wan import PreTrainedWAN
-from megatron.bridge.models.wan.wan_provider import WanModelProvider
+from dfm.src.megatron.model.wan.wan_provider import WanModelProvider
 from megatron.core.transformer.utils import openai_gelu
 from megatron.bridge.models.conversion.utils import get_module_and_param_from_name
 
@@ -89,12 +89,18 @@ class WanBridge(MegatronModelBridge):
             "scale_shift_table": "head.modulation",
             "patch_embedding.weight": "patch_embedding.weight",
             "patch_embedding.bias": "patch_embedding.bias",
-            "condition_embedder.time_embedder.linear_1.weight": "time_embedding.0.weight",
-            "condition_embedder.time_embedder.linear_1.bias": "time_embedding.0.bias",
-            "condition_embedder.time_embedder.linear_2.weight": "time_embedding.2.weight",
-            "condition_embedder.time_embedder.linear_2.bias": "time_embedding.2.bias",
-            "condition_embedder.time_proj.weight": "time_projection.1.weight",
-            "condition_embedder.time_proj.bias": "time_projection.1.bias",
+            # "condition_embedder.time_embedder.linear_1.weight": "time_embedding.0.weight",
+            # "condition_embedder.time_embedder.linear_1.bias": "time_embedding.0.bias",
+            # "condition_embedder.time_embedder.linear_2.weight": "time_embedding.2.weight",
+            # "condition_embedder.time_embedder.linear_2.bias": "time_embedding.2.bias",
+            # "condition_embedder.time_proj.weight": "time_projection.1.weight",
+            # "condition_embedder.time_proj.bias": "time_projection.1.bias",
+            "condition_embedder.time_embedder.linear_1.weight": "time_embedder.linear_1.weight",
+            "condition_embedder.time_embedder.linear_1.bias": "time_embedder.linear_1.bias",
+            "condition_embedder.time_embedder.linear_2.weight": "time_embedder.linear_2.weight",
+            "condition_embedder.time_embedder.linear_2.bias": "time_embedder.linear_2.bias",
+            "condition_embedder.time_proj.weight": "time_proj.weight",
+            "condition_embedder.time_proj.bias": "time_proj.bias",
             "condition_embedder.text_embedder.linear_1.weight": "text_embedding.0.weight",
             "condition_embedder.text_embedder.linear_1.bias": "text_embedding.0.bias",
             "condition_embedder.text_embedder.linear_2.weight": "text_embedding.2.weight",

@@ -58,9 +58,9 @@ from typing import Tuple
 
 from omegaconf import OmegaConf
 
-from megatron.bridge.recipes.wan.wan import pretrain_config
+from dfm.src.megatron.recipes.wan.wan import pretrain_config
 from megatron.bridge.training.config import ConfigContainer
-from megatron.bridge.training.wan_step import WanForwardStep
+from dfm.src.megatron.model.wan.wan_step import WanForwardStep
 from megatron.bridge.training.pretrain import pretrain
 from megatron.bridge.training.utils.omegaconf_utils import (
     apply_overrides,

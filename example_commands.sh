@@ -5,7 +5,7 @@ export PYTHONPATH="${DFM_PATH}/.:${MBRIDGE_PATH}/src/.:/opt/NeMo-Framework-Launc
 
 
 ### install dependencies
-pip install --upgrade git+https://github.com/NVIDIA/Megatron-LM.git@core_v0.15.0rc7
+pip install --upgrade git+https://github.com/NVIDIA/Megatron-LM.git@ce8185cbbe04f38beb74360e878450f2e8525885
 python3 -m pip install --upgrade diffusers
 pip install easydict
 pip install imageio
@@ -13,7 +13,7 @@ pip install imageio-ffmpeg
 
 
 ### Convert checkpoint
-See examples/conversion/convert_wan_checkpoints.py for details.
+See ${MBRIDGE_PATH}/examples/conversion/convert_wan_checkpoints.py for details.
 
 
 ### Finetuning
@@ -23,8 +23,8 @@ EXP_NAME=...
 PRETRAINED_CHECKPOINT=/path/to/pretrained_checkpoint
 CHECKPOINT_DIR=/path/to/checkpoint_dir
 DATASET_PATH=/path/to/dataset
-cd ${MBRIDGE_PATH}
-NVTE_FUSED_ATTN=1 torchrun --nproc_per_node=8 examples/recipes/wan/pretrain_wan.py \
+cd ${DFM_PATH}
+NVTE_FUSED_ATTN=1 torchrun --nproc_per_node=8 dfm/examples/megatron/recipe/wan/pretrain_wan.py \
   model.tensor_model_parallel_size=1 \
   model.pipeline_model_parallel_size=1 \
   model.context_parallel_size=4 \
@@ -60,8 +60,8 @@ export HF_TOKEN=...
 CHECKPOINT_DIR=/path/to/checkpoint_dir
 T5_DIR=/path/to/t5_weights
 VAE_DIR=/path/to/vae_weights
-cd ${MBRIDGE_PATH}
-NVTE_FUSED_ATTN=1 torchrun --nproc_per_node=1 examples/recipes/wan/inference_wan.py \
+cd ${DFM_PATH}
+NVTE_FUSED_ATTN=1 torchrun --nproc_per_node=1 dfm/examples/megatron/recipe/wan/inference_wan.py  \
   --task t2v-1.3B \
   --sizes 832*480 \
   --checkpoint_dir ${CHECKPOINT_DIR} \
